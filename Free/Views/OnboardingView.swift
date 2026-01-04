@@ -151,3 +151,54 @@ struct OnboardingView: View {
         .preferredColorScheme(.dark)
     }
 }
+
+struct FeatureCard: View {
+    let title: String
+    let iconName: String
+    let imageUrl: String
+
+    var body: some View {
+        VStack(spacing: 12) {
+            ZStack {
+                AsyncImage(url: URL(string: imageUrl)) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Color.gray.opacity(0.2)
+                }
+                .frame(width: 100, height: 125)
+                .scaleEffect(1.1) // Simulates group-hover:scale-110
+
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+
+                VStack {
+                    Spacer()
+                    Image(systemName: iconName)
+                        .font(.system(size: 28))
+                        .foregroundColor(.primaryGreen)
+                        .shadow(radius: 5)
+                    Spacer()
+                }
+            }
+            .frame(width: 100, height: 125)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+            )
+
+            Text(title)
+                .font(.system(size: 13, weight: .medium))
+                .foregroundColor(.white)
+        }
+    }
+}
+
+#Preview {
+    OnboardingView()
+        .environmentObject(AppViewModel())
+}
