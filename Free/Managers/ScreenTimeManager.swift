@@ -42,8 +42,8 @@ class ScreenTimeManager: ObservableObject {
     }
 
     func applyRestrictions() {
-        // Shield all application categories to block all apps.
-        store.shield.applicationCategories = .all
+        // Shield all applications.
+        store.shield.applications = .all()
     }
 
     func clearRestrictions() {
