@@ -42,8 +42,9 @@ class ScreenTimeManager: ObservableObject {
     }
 
     func applyRestrictions() {
-        // Shield all applications.
-        store.shield.applications = .all()
+        // To shield all applications, we shield the `.all` category token.
+        // The property expects a Set of tokens.
+        store.shield.applicationCategories = Set([.all])
     }
 
     func clearRestrictions() {
